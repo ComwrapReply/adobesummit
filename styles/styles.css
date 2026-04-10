@@ -20,7 +20,7 @@
 }
 
 @font-face {
-  font-family: 'Manrope-fallback';
+  font-family: Manrope-fallback;
   size-adjust: 96%;
   src: local('Arial');
 }
@@ -41,7 +41,7 @@ body.appear {
 
 /* selection */
 ::selection {
-  background: rgba(0, 251, 251, 0.25);
+  background: rgb(0 251 251 / 25%);
   color: var(--color-on-surface);
 }
 
@@ -184,7 +184,7 @@ a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
   filter: brightness(1.1);
-  box-shadow: 0 0 40px rgba(255, 137, 171, 0.3);
+  box-shadow: 0 0 40px rgb(255 137 171 / 30%);
   transform: translateY(-1px);
 }
 
@@ -203,7 +203,7 @@ button.button.secondary {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   color: var(--color-secondary);
-  border-color: rgba(0, 251, 251, 0.2);
+  border-color: rgb(0 251 251 / 20%);
 }
 
 a.button.secondary:hover,
