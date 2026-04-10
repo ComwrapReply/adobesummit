@@ -15,6 +15,12 @@ main > .section.hero-container {
   gap: var(--space-32, 32px);
   padding: var(--space-40, 40px) var(--space-24, 24px);
   background-color: #0f172a;
+  background-image:
+    linear-gradient(rgb(15 23 42 / 80%), rgb(15 23 42 / 80%)),
+    url('/assets/Las-Vegas-Street-Image.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 400px;
   align-items: center;
 }
