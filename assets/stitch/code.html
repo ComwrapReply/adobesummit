@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#ff89ab",
+                    "on-error": "#490013",
+                    "on-tertiary-fixed-variant": "#665500",
+                    "on-secondary-fixed": "#004747",
+                    "on-background": "#dee5ff",
+                    "outline": "#6d758f",
+                    "secondary-dim": "#00ecec",
+                    "tertiary-container": "#ffd709",
+                    "secondary": "#00fbfb",
+                    "on-primary-container": "#4c0021",
+                    "on-tertiary": "#655400",
+                    "tertiary-fixed": "#ffd709",
+                    "on-primary-fixed": "#000000",
+                    "inverse-surface": "#faf8ff",
+                    "error-dim": "#d73357",
+                    "surface-dim": "#050d22",
+                    "surface-variant": "#192543",
+                    "primary-dim": "#e30071",
+                    "surface-bright": "#1e2b4c",
+                    "secondary-fixed": "#00fbfb",
+                    "on-tertiary-container": "#5b4b00",
+                    "background": "#050d22",
+                    "surface-container-high": "#131e3b",
+                    "on-primary": "#62002d",
+                    "on-primary-fixed-variant": "#5d002a",
+                    "tertiary-fixed-dim": "#efc900",
+                    "primary-fixed-dim": "#ff5290",
+                    "secondary-container": "#006a6a",
+                    "on-secondary-fixed-variant": "#006666",
+                    "inverse-primary": "#bc005c",
+                    "surface-container-low": "#09122a",
+                    "primary-fixed": "#ff709e",
+                    "error": "#ff6e84",
+                    "surface-tint": "#ff89ab",
+                    "primary-container": "#ff709e",
+                    "on-secondary": "#005c5c",
+                    "surface-container-lowest": "#000000",
+                    "inverse-on-surface": "#4d546d",
+                    "outline-variant": "#3f475f",
+                    "on-tertiary-fixed": "#453900",
+                    "on-error-container": "#ffb2b9",
+                    "surface-container": "#0e1832",
+                    "on-surface-variant": "#a3aac6",
+                    "on-surface": "#dee5ff",
+                    "secondary-fixed-dim": "#00ecec",
+                    "tertiary-dim": "#efc900",
+                    "surface-container-highest": "#192543",
+                    "surface": "#050d22",
+                    "on-secondary-container": "#d9fffe",
+                    "tertiary": "#ffe792",
+                    "error-container": "#a70138"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #050d22;
+            color: #dee5ff;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(25, 37, 67, 0.6);
+            backdrop-filter: blur(16px);
+        }
+        .neon-glow-pink {
+            box-shadow: 0 0 20px rgba(255, 137, 171, 0.15);
+        }
+        .neon-text-pink {
+            text-shadow: 0 0 12px rgba(255, 137, 171, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-surface-dim selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full bg-slate-950/60 backdrop-blur-xl z-50 shadow-[0_0_20px_rgba(255,0,127,0.1)] flex justify-between items-center px-8 py-4">
+<div class="text-xl font-bold tracking-tighter text-slate-100 font-['Space_Grotesk']">
+            NEON_STUDIO
+        </div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-pink-500 font-bold border-b-2 border-pink-500 pb-1 font-['Space_Grotesk'] tracking-tight" href="#">Work</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">Process</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors font-['Space_Grotesk'] tracking-tight" href="#">About</a>
+</nav>
+<button class="bg-primary hover:bg-primary-dim text-on-primary px-6 py-2 rounded-lg font-bold transition-all active:scale-95 duration-200">
+            Contact
+        </button>
+</header>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex items-center px-8 lg:px-20 overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full max-w-7xl mx-auto">
+<!-- Content Left -->
+<div class="z-10">
+<span class="inline-block px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label text-sm uppercase tracking-widest mb-6">
+                        Portfolio 2024
+                    </span>
+<h1 class="text-6xl md:text-8xl font-headline font-bold tracking-tighter text-on-surface mb-4 leading-[0.9] neon-text-pink">
+                        DIGITAL <br/>EUPHORIA
+                    </h1>
+<p class="text-xl md:text-2xl font-body text-on-surface-variant max-w-lg mb-10 border-l-4 border-secondary pl-6">
+                        The Electric Curator. Crafting high-fidelity cinematic experiences for the digital vanguard.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="px-8 py-4 bg-gradient-to-r from-primary-dim to-primary text-on-primary font-bold rounded-lg neon-glow-pink hover:opacity-90 transition-all active:scale-95">
+                            View Case Studies
+                        </button>
+<button class="px-8 py-4 border border-secondary/20 hover:border-secondary text-secondary font-bold rounded-lg glass-panel transition-all active:scale-95">
+                            Our Method
+                        </button>
+</div>
+</div>
+<!-- Visual Right -->
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+<div class="relative aspect-square overflow-hidden rounded-xl bg-surface-container-high border border-outline-variant/30">
+<img alt="Digital avatars in a vibrant neon Las Vegas setting with cinematic lighting and futuristic atmosphere" class="w-full h-full object-cover" data-alt="Digital avatars in a vibrant neon Las Vegas setting with cinematic lighting and futuristic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACjDzKj3Y1z8RWFnoV4T7uLYnjFhCbHHM7e9EyC1csNJEeBhL0CPaHmufOeZkAZiHp88Bi684mzq9AQ2Hv-uYStYNHNxJUbJtqlJVhhqrkmalKDA-CLApuV79wn1Yi-kC6d-pYClT9orGV4KJmBy8Pq0urtbwev2Kfvvnz8fPNXEe3nQK_TkXuxmhz-3-Asc7__EB2Ri0OTZjImb-r-7IEqv-msoJrF6iw27_LN1WVnYFxzx0WoVFcxcXRRLAKWfziJ4VPBnGIyibR"/>
+</div>
+<!-- Decorative Elements -->
+<div class="absolute -bottom-6 -left-6 w-32 h-32 bg-secondary/10 blur-3xl rounded-full"></div>
+<div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/10 blur-3xl rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Physical Dimensions Section (Product Mockups) -->
+<section class="py-32 px-8 lg:px-20 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div>
+<h2 class="text-secondary text-sm font-label uppercase tracking-[0.3em] mb-4">Physical Dimensions</h2>
+<h3 class="text-4xl md:text-5xl font-headline font-bold text-on-surface">Tangible Interactions</h3>
+</div>
+<p class="text-on-surface-variant font-body max-w-sm">
+                        Bridging the gap between liquid code and physical presence through intentional object design.
+                    </p>
+</div>
+<!-- Bento-style Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Card 1 -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-highest border border-outline-variant/20 aspect-video">
+<img alt="Sleek modern hardware prototype with glowing interface elements in a dark studio" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Sleek modern hardware prototype with glowing interface elements in a dark studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqBXnxki2QKoo1kIHgjxjTKA2UZt3LdFwHQhT8tL5It2btjdlTkDAjKW3Tu6gYH4-7Gbck9XBmyA75kIozNDsZjjLwKPDgdvCmJ9GHHR7aKh2eQJNBn4NlXtlKKKagifWZU9YwthdbMwyoPHrcuZVhjpftR2W2SbtkmlGSPuQZTOqlcKSCA_zPDMmiem8PWrlxW7hUPdrSAx5o1AxWU42ouun9GMmH-kEIhAEI5nlYo29zs__Rbpf0_cfLqUctEKO4T-VjgsyRPLQ4"/>
+<div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-surface-dim to-transparent">
+<h4 class="text-2xl font-headline font-bold text-on-surface">Neural Interface V1</h4>
+</div>
+</div>
+<!-- Card 2 (Cherry Bev) -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-highest border border-outline-variant/20">
+<div class="aspect-square">
+<img alt="A premium cherry flavored beverage in a designer glass bottle with dramatic neon red backlighting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="A premium cherry flavored beverage in a designer glass bottle with dramatic neon red backlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxZFx1y_pvuoxwr5cppqWBybxpBqlusKGY4WI9RhRml1tD2CJcuyekSUHp5HALDDKPLd70TBV2mbILF0F3nHmwyluTByDQ8qIZh9NmIa6fnpHrKr9m7ktcb44M7HxS2RvE6BGHbCh-xS-IVrXX7BiNTWrgmh8JdkWLVYRWlNkUxKd8E310lYdYvdb7r71DIuAdyJH8a6Avnut34gqg-1U5P3Aa9AUBi5iuL7pYq4ktxiHgrz93PVMtNIB8o6fK51f4OE6cpiZD8lXA"/>
+</div>
+<div class="p-6">
+<p class="text-tertiary font-label text-xs uppercase tracking-widest mb-2">Curation 02</p>
+<h4 class="text-xl font-headline font-bold text-on-surface">CHERRY_EUPHORIA</h4>
+</div>
+</div>
+<!-- Card 3 (Cherry Bev) -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-highest border border-outline-variant/20">
+<div class="aspect-[4/5]">
+<img alt="Close-up of a designer beverage bottle with condensation and vibrant red liquid highlights" class="w-full h-full object-cover" data-alt="Close-up of a designer beverage bottle with condensation and vibrant red liquid highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDijvMQK323a6Z4MYB1OjqBP4A1r--2KCYvCj7_M5DYA-AGTvF6MH3tLZ_tJFzIYu-kaaF60wXQKLvA8RQNJ6UZLEueK4MddTiiO3YsHSxc-HQCQfBL1kVFG1WhKP-0bxb8c1riOSBVamBRsN6fyUtnPsBEQkZzZc_eoywIwPPWmWenC8FZYS9IXFrEd1AmGSmthcBgxj4PFqU65ORoHuCUNaEwiGvzgV5je9QV7am3Azv7xLwKkrmtwLM2LFQvrwacmQ4U75AX5xll"/>
+</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+<span class="text-on-primary font-bold px-4 py-2 border-2 border-on-primary rounded-full">View Concept</span>
+</div>
+</div>
+<!-- Card 4 (Cherry Bev) -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-highest border border-outline-variant/20">
+<div class="grid grid-cols-2 h-full">
+<div class="p-10 flex flex-col justify-center">
+<h4 class="text-3xl font-headline font-bold text-on-surface mb-4 leading-tight">Liquid Assets Marketing</h4>
+<p class="text-on-surface-variant mb-6">Designing the aesthetic of the next generation of lifestyle elixirs.</p>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs rounded-full">Packaging</span>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container text-xs rounded-full">3D Render</span>
+</div>
+</div>
+<div class="h-full overflow-hidden">
+<img alt="Multiple designer bottles of cherry flavored beverage arranged in an artistic asymmetric layout" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" data-alt="Multiple designer bottles of cherry flavored beverage arranged in an artistic asymmetric layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6AIKLZIfCjI-D6ABFlHykzIfTtEK4ZQH20p0aRD58KS-Za7lcUul7DbhF884llvrAesRh9k9UXJt7OGWWVvPOlmjt-BrOyvA2pQe_3JUiKNapcxRUJdMM6fuirmNL26ZpzIn7rlgEWoD49ef0LNnAmWYOKcwMvnfcLgMASDH5EzuuLCZHNGNLBEPku0mKyG83PsIukxRd49bolCpO5KeY_8nr0pc9Pp0Ept5v4M8mpfqvgssTaAejT7y6LHTvvuDpJN0DQtnbmCpk"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Engagement Engine Section -->
+<section class="py-32 px-8 lg:px-20 relative overflow-hidden">
+<div class="max-w-4xl mx-auto relative z-10">
+<div class="text-center mb-16">
+<h2 class="text-primary text-sm font-label uppercase tracking-[0.4em] mb-4">Engagement Engine</h2>
+<h3 class="text-5xl md:text-6xl font-headline font-bold text-on-surface mb-6">Let's Build the Future</h3>
+<p class="text-on-surface-variant text-lg">Initialize a connection with our studio to begin your transition.</p>
+</div>
+<div class="glass-panel p-8 md:p-12 rounded-2xl border border-outline-variant/30 shadow-2xl">
+<form action="#" class="space-y-8" method="POST">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-2">
+<label class="text-sm font-label text-tertiary uppercase tracking-widest ml-1">Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-secondary focus:bg-surface-bright transition-all" placeholder="Identity Code" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-label text-tertiary uppercase tracking-widest ml-1">Email</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-secondary focus:bg-surface-bright transition-all" placeholder="Communication Node" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-label text-tertiary uppercase tracking-widest ml-1">Company</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface placeholder:text-outline focus:ring-2 focus:ring-secondary focus:bg-surface-bright transition-all" placeholder="Organization Unit" type="text"/>
+</div>
+<button class="w-full py-5 bg-gradient-to-r from-primary-dim via-primary to-primary-dim text-on-primary font-headline font-bold text-xl rounded-lg neon-glow-pink tracking-widest hover:brightness-110 active:scale-[0.98] transition-all" type="submit">
+                            INITIALIZE CONNECTION
+                        </button>
+</form>
+</div>
+</div>
+<!-- Background Glows -->
+<div class="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-0 right-0 w-80 h-80 bg-secondary/10 blur-[120px] rounded-full"></div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-950 w-full py-12 px-8 mt-20">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
+<div class="font-['Manrope'] text-sm uppercase tracking-widest text-slate-500">
+                © 2024 DIGITAL DESIGNER. ALL RIGHTS RESERVED.
+            </div>
+<div class="flex gap-8">
+<a class="font-['Manrope'] text-sm uppercase tracking-widest text-slate-500 hover:text-yellow-200 transition-colors duration-300 hover:opacity-80" href="#">Instagram</a>
+<a class="font-['Manrope'] text-sm uppercase tracking-widest text-slate-500 hover:text-yellow-200 transition-colors duration-300 hover:opacity-80" href="#">Dribbble</a>
+<a class="font-['Manrope'] text-sm uppercase tracking-widest text-cyan-400 hover:text-yellow-200 transition-colors duration-300 hover:opacity-80" href="#">LinkedIn</a>
+</div>
+</div>
+</footer>
+</body></html>
