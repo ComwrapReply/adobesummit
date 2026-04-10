@@ -1,19 +1,38 @@
+/* Cards — Base Grid */
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  gap: var(--space-24, 24px);
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
+  background-color: var(--color-surface-variant, #192543);
+  border: 1px solid rgba(63, 71, 95, 0.2);
+  border-radius: var(--radius-xl, 1.5rem);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition-base, 250ms ease);
+}
+
+.cards > ul > li:hover {
+  transform: translateY(-2px);
 }
 
 .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--space-16, 16px);
+}
+
+.cards .cards-card-body p {
+  color: var(--color-on-surface-variant, #a3aac6);
+  font-size: var(--body-font-size-s, 16px);
+}
+
+.cards .cards-card-body p strong {
+  color: var(--color-on-surface, #dee5ff);
+  font-family: var(--font-family-heading, sans-serif);
 }
 
 .cards .cards-card-image {
@@ -24,4 +43,175 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+/* ========================================
+   BENTO VARIANT — Asymmetric collage grid
+   Usage: Cards (bento) in section metadata
+   ======================================== */
+.cards.bento > ul {
+  grid-template-columns: 1fr;
+  gap: var(--space-24, 24px);
+}
+
+.cards.bento > ul > li {
+  position: relative;
+  border-radius: var(--radius-xl, 1.5rem);
+  overflow: hidden;
+}
+
+/* Bento cards: image fills, text overlays */
+.cards.bento .cards-card-image {
+  position: relative;
+  line-height: 0;
+}
+
+.cards.bento .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.cards.bento > ul > li:hover .cards-card-image img {
+  transform: scale(1.05);
+}
+
+/* Body overlay on image */
+.cards.bento .cards-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-24, 24px);
+  background: linear-gradient(to top, rgba(5, 13, 34, 0.9) 0%, transparent 100%);
+  margin: 0;
+  z-index: 1;
+}
+
+.cards.bento .cards-card-body h3,
+.cards.bento .cards-card-body h4 {
+  font-family: var(--font-family-heading, sans-serif);
+  font-weight: 700;
+  color: var(--color-on-surface, #dee5ff);
+  margin: 0 0 var(--space-4, 4px);
+  font-size: var(--heading-font-size-s, 18px);
+}
+
+.cards.bento .cards-card-body p {
+  color: var(--color-on-surface-variant, #a3aac6);
+  margin: 0;
+  font-size: var(--body-font-size-xs, 14px);
+  line-height: 1.5;
+}
+
+/* Eyebrow text (gold labels like "CURATION 02") */
+.cards.bento .cards-card-body p em {
+  color: var(--color-tertiary, #ffe792);
+  font-family: var(--font-family-label, sans-serif);
+  font-size: var(--label-font-size-sm, 0.75rem);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: var(--space-4, 4px);
+}
+
+/* Chips inside cards */
+.cards.bento .cards-card-body p strong {
+  display: inline-block;
+  padding: var(--space-4, 4px) var(--space-12, 12px);
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--color-secondary-container, #006a6a);
+  color: var(--color-on-secondary-container, #d9fffe);
+  font-size: var(--label-font-size-sm, 0.75rem);
+  font-family: var(--font-family-label, sans-serif);
+  font-weight: 600;
+  margin-right: var(--space-4, 4px);
+}
+
+/* Card without overlay — side-by-side text (card 4 pattern) */
+.cards.bento > ul > li.cards-no-overlay {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cards.bento > ul > li.cards-no-overlay .cards-card-body {
+  position: static;
+  background: none;
+  padding: var(--space-32, 32px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cards.bento > ul > li.cards-no-overlay .cards-card-image img {
+  height: 100%;
+}
+
+/* ===== Desktop: 12-column bento grid ===== */
+@media (min-width: 900px) {
+  .cards.bento > ul {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* Card 1: wide landscape — spans 8 columns */
+  .cards.bento > ul > li:nth-child(1) {
+    grid-column: span 8;
+  }
+
+  .cards.bento > ul > li:nth-child(1) .cards-card-image img {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Card 2: tall portrait — spans 4 columns */
+  .cards.bento > ul > li:nth-child(2) {
+    grid-column: span 4;
+  }
+
+  .cards.bento > ul > li:nth-child(2) .cards-card-image img {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Card 3: tall portrait — spans 4 columns */
+  .cards.bento > ul > li:nth-child(3) {
+    grid-column: span 4;
+  }
+
+  .cards.bento > ul > li:nth-child(3) .cards-card-image img {
+    aspect-ratio: 3 / 5;
+  }
+
+  /* Card 4: wide with side text — spans 8 columns */
+  .cards.bento > ul > li:nth-child(4) {
+    grid-column: span 8;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cards.bento > ul > li:nth-child(4) .cards-card-body {
+    position: static;
+    background: none;
+    padding: var(--space-40, 40px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cards.bento > ul > li:nth-child(4) .cards-card-body h3,
+  .cards.bento > ul > li:nth-child(4) .cards-card-body h4 {
+    font-size: var(--heading-font-size-l, 26px);
+    line-height: 1.15;
+    margin-bottom: var(--space-12, 12px);
+  }
+
+  .cards.bento > ul > li:nth-child(4) .cards-card-body p {
+    font-size: var(--body-font-size-s, 16px);
+  }
+
+  .cards.bento > ul > li:nth-child(4) .cards-card-image img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
 }
