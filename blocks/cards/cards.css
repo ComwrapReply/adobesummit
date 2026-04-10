@@ -10,7 +10,7 @@
 
 .cards > ul > li {
   background-color: var(--color-surface-variant, #192543);
-  border: 1px solid rgba(63, 71, 95, 0.2);
+  border: 1px solid rgb(63 71 95 / 20%);
   border-radius: var(--radius-xl, 1.5rem);
   overflow: hidden;
   position: relative;
@@ -84,7 +84,7 @@
   left: 0;
   right: 0;
   padding: var(--space-24, 24px);
-  background: linear-gradient(to top, rgba(5, 13, 34, 0.9) 0%, transparent 100%);
+  background: linear-gradient(to top, rgb(5 13 34 / 90%) 0%, transparent 100%);
   margin: 0;
   z-index: 1;
 }
@@ -151,7 +151,7 @@
 }
 
 /* ===== Desktop: 12-column bento grid ===== */
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .cards.bento > ul {
     grid-template-columns: repeat(12, 1fr);
   }
@@ -183,14 +183,19 @@
     aspect-ratio: 3 / 5;
   }
 
-  /* Card 4: wide with side text — spans 8 columns */
+  /* Card 4: wide with text left, image right — spans 8 columns */
   .cards.bento > ul > li:nth-child(4) {
     grid-column: span 8;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
+  .cards.bento > ul > li:nth-child(4) .cards-card-image {
+    order: 2;
+  }
+
   .cards.bento > ul > li:nth-child(4) .cards-card-body {
+    order: 1;
     position: static;
     background: none;
     padding: var(--space-40, 40px);
