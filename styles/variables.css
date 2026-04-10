@@ -1,0 +1,177 @@
+/*
+ * Design System: Cinematic Neon Editorial — "The Electric Curator"
+ * All design tokens as CSS custom properties.
+ */
+
+:root {
+  /* ========================================
+     SURFACE HIERARCHY (Tonal Layering)
+     No borders — define space through tone.
+     ======================================== */
+  --color-surface-0: #050d22;
+  --color-surface-1: #09122a;
+  --color-surface-2: #0e1832;
+  --color-surface-3: #131e3b;
+  --color-surface-4: #1e2b4c;
+  --color-surface-variant: #192543;
+
+  /* ========================================
+     ACCENT COLORS — The Neon Spectrum
+     ======================================== */
+
+  /* Primary — Pink / Neon Pulse */
+  --color-primary: #ff89ab;
+  --color-primary-dim: #e30071;
+  --color-primary-container: #ff709e;
+  --color-on-primary: #4c0021;
+
+  /* Secondary — Cyan / Electric Accent */
+  --color-secondary: #00fbfb;
+  --color-secondary-dim: #00ecec;
+  --color-secondary-container: #006a6a;
+  --color-on-secondary-container: #d9fffe;
+
+  /* Tertiary — Gold / Editorial Highlight */
+  --color-tertiary: #ffe792;
+  --color-tertiary-dim: #efc900;
+  --color-tertiary-container: #ffd709;
+
+  /* Error */
+  --color-error: #ff6e84;
+  --color-error-dim: #d73357;
+  --color-error-container: #a70138;
+
+  /* ========================================
+     TEXT COLORS
+     Never use pure white (#fff) for body.
+     ======================================== */
+  --color-on-surface: #dee5ff;
+  --color-on-surface-variant: #a3aac6;
+  --color-on-surface-dim: #6d758f;
+  --color-outline: #6d758f;
+  --color-outline-variant: #3f475f;
+
+  /* ========================================
+     SEMANTIC / LINK COLORS
+     ======================================== */
+  --color-link: #ff89ab;
+  --color-link-hover: #e30071;
+
+  /* ========================================
+     BACKWARD-COMPAT ALIASES
+     Existing block CSS references these.
+     ======================================== */
+  --background-color: var(--color-surface-0);
+  --light-color: var(--color-surface-1);
+  --dark-color: var(--color-on-surface-dim);
+  --text-color: var(--color-on-surface);
+  --link-color: var(--color-link);
+  --link-hover-color: var(--color-link-hover);
+
+  /* ========================================
+     TYPOGRAPHY
+     Space Grotesk = headlines, labels
+     Manrope = body, titles
+     ======================================== */
+  --font-family-heading: 'Space Grotesk', 'Space Grotesk-fallback', sans-serif;
+  --font-family-body: 'Manrope', 'Manrope-fallback', sans-serif;
+  --font-family-label: 'Space Grotesk', 'Space Grotesk-fallback', sans-serif;
+
+  /* Aliases */
+  --body-font-family: var(--font-family-body);
+  --heading-font-family: var(--font-family-heading);
+
+  /* Body sizes (mobile-first) */
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
+
+  /* Heading sizes (mobile-first) */
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 32px;
+  --heading-font-size-l: 26px;
+  --heading-font-size-m: 22px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+
+  /* Display (hero-scale) */
+  --display-font-size-lg: clamp(3rem, 6vw, 5rem);
+  --display-letter-spacing: -0.02em;
+  --display-line-height: 0.95;
+
+  /* Label (eyebrow text) */
+  --label-font-size-sm: 0.75rem;
+  --label-font-size-md: 0.875rem;
+  --label-letter-spacing: 0.2em;
+
+  /* ========================================
+     SPACING SCALE
+     ======================================== */
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-40: 2.5rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-80: 5rem;
+  --space-96: 6rem;
+  --space-128: 8rem;
+
+  /* ========================================
+     BORDER RADIUS
+     ======================================== */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* ========================================
+     GLASSMORPHISM
+     Fill: surface-variant at 60% + blur
+     ======================================== */
+  --glass-bg: rgba(25, 37, 67, 0.6);
+  --glass-blur: blur(16px);
+  --glass-border: 1px solid rgba(222, 229, 255, 0.08);
+
+  /* ========================================
+     ELEVATION — Glow Shadows
+     No black drop-shadows. Use colored glows.
+     ======================================== */
+  --shadow-sm: 0 2px 8px rgba(0, 251, 251, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 251, 251, 0.06);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow-primary: 0 0 30px rgba(255, 137, 171, 0.15);
+  --shadow-glow-secondary: 0 0 30px rgba(0, 251, 251, 0.15);
+  --shadow-glow-tertiary: 0 0 20px rgba(255, 231, 146, 0.15);
+
+  /* ========================================
+     TRANSITIONS
+     ======================================== */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ========================================
+     LAYOUT
+     ======================================== */
+  --nav-height: 64px;
+  --content-max-width: 1200px;
+  --section-padding: var(--space-80) 0;
+}
+
+/* Desktop overrides */
+@media (width >= 900px) {
+  :root {
+    --heading-font-size-xxl: 52px;
+    --heading-font-size-xl: 40px;
+    --heading-font-size-l: 32px;
+    --heading-font-size-m: 26px;
+    --heading-font-size-s: 22px;
+    --heading-font-size-xs: 18px;
+  }
+}
