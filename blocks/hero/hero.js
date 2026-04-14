@@ -107,8 +107,8 @@ export default function decorate(block) {
     btnWrap.classList.add('hero-buttons');
     buttonParas.forEach((p, i) => {
       const link = p.querySelector('a.button');
-      if (i === 0) link.classList.add('button-primary');
-      else link.classList.add('button-secondary');
+      if (i === 0) link.classList.add('primary');
+      else link.classList.add('secondary');
       btnWrap.append(p);
     });
     textCol.append(btnWrap);

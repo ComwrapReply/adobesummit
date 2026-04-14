@@ -191,7 +191,7 @@ main > .section.hero-container {
   text-align: left;
 }
 
-/* ── Buttons ───────────────────────────────────────────────── */
+/* ── Buttons — layout only (styles from global styles.css) ──── */
 .hero .hero-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -206,103 +206,10 @@ main > .section.hero-container {
   padding: 0;
 }
 
+/* Hero buttons are larger than the global default */
 .hero .hero-buttons a.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 32px;
-  border-radius: 6px;
   font-size: 1.5rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-  min-height: 44px;
-}
-
-.hero .hero-buttons a.button:hover {
-  /* Individual button variants control their own hover transform */
-  box-shadow: 0 4px 20px rgb(0 0 0 / 40%);
-}
-
-/* Primary – cartoon / retro hard-slab 3D (ref: button.png)
- *
- * A single hard (zero-blur) box-shadow offset bottom-right creates
- * the thick solid depth block. On press the button translates
- * exactly by the shadow offset so the face lands flush — shadow
- * collapses to zero → looks physically sunken.
- */
-.hero .hero-buttons a.button-primary {
-  --btn-depth: 6px; /* thickness of the 3D slab */
-
-  background: #ec4899;
-  color: #fff;
-  border: 2px solid #831843;
-  border-radius: 6px;
-  position: relative;
-  transform: translate(0, 0);
-
-  /* hard bottom + right shadow = the visible side-face block */
-  box-shadow:
-    var(--btn-depth) var(--btn-depth) 0 0 #831843,
-    0 0 24px rgb(236 72 153 / 30%);
-  transition:
-    transform 0.08s ease,
-    box-shadow 0.08s ease;
-  will-change: transform, box-shadow;
-}
-
-/* Hover — brighten face, keep slab so user can see it's pressable */
-.hero .hero-buttons a.button-primary:hover {
-  background: #f472b6;
-  box-shadow:
-    var(--btn-depth) var(--btn-depth) 0 0 #831843,
-    0 0 36px rgb(236 72 153 / 50%);
-}
-
-/* Active / press — translate RIGHT+DOWN by depth, collapse shadow → sunken */
-.hero .hero-buttons a.button-primary:active {
-  background: #db2777;
-  transform: translate(var(--btn-depth), var(--btn-depth));
-  box-shadow:
-    0 0 0 0 #831843,
-    0 0 12px rgb(236 72 153 / 20%);
-}
-
-/* Secondary – same hard-slab 3D as primary, using --color-secondary-container */
-.hero .hero-buttons a.button-secondary {
-  --btn-depth: 6px;
-
-  background: var(--color-secondary-container, #006a6a);
-  color: var(--color-on-secondary-container, #d9fffe);
-  border: 2px solid #004040;
-  border-radius: 6px;
-  position: relative;
-  transform: translate(0, 0);
-  box-shadow:
-    var(--btn-depth) var(--btn-depth) 0 0 #004040,
-    0 0 24px rgb(0 106 106 / 40%);
-  transition:
-    transform 0.08s ease,
-    box-shadow 0.08s ease;
-  will-change: transform, box-shadow;
-}
-
-/* Hover — brighten face, keep slab */
-.hero .hero-buttons a.button-secondary:hover {
-  background: #008080;
-  box-shadow:
-    var(--btn-depth) var(--btn-depth) 0 0 #004040,
-    0 0 36px rgb(0 128 128 / 55%);
-}
-
-/* Active / press — translate into shadow, collapse it → sunken */
-.hero .hero-buttons a.button-secondary:active {
-  background: #004040;
-  transform: translate(var(--btn-depth), var(--btn-depth));
-  box-shadow:
-    0 0 0 0 #004040,
-    0 0 12px rgb(0 106 106 / 20%);
+  padding: 14px 32px;
 }
 
 /* ── Tablet (600px+) ───────────────────────────────────────── */

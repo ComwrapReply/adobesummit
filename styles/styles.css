@@ -141,12 +141,16 @@ a:hover {
 }
 
 /* ========================================
-   BUTTONS — Neon Pulse / Cyan Ghost / Gold
+   BUTTONS — Hard-slab 3D system
+   A hard (zero-blur) box-shadow offset creates the
+   visible depth block. On hover/focus the face
+   translates onto the shadow → it collapses → sunken.
    ======================================== */
 p.button-wrapper {
   margin: 12px 0;
 }
 
+/* ── Base shell ────────────────────────────────── */
 a.button:any-link,
 button.button {
   box-sizing: border-box;
@@ -155,37 +159,55 @@ button.button {
   justify-content: center;
   max-width: 100%;
   margin: 0;
+  padding: var(--btn-padding);
   border: 2px solid transparent;
-  border-radius: var(--radius-md);
-  padding: 0.75em 1.5em;
+  border-radius: var(--btn-radius);
   font-family: var(--font-family-heading);
-  font-weight: 600;
-  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  font-size: var(--btn-font-size);
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: all var(--transition-base);
+  position: relative;
+  transform: translate(0, 0);
+  transition: var(--btn-transition);
+  will-change: transform, box-shadow;
+  min-height: 44px;
 }
 
-/* Primary — The Neon Pulse */
+/* ── Primary — Pink hard slab ──────────────────── */
 a.button.primary,
 button.button.primary {
-  background: linear-gradient(135deg, var(--color-primary-dim), var(--color-primary));
-  color: var(--color-on-primary);
-  border-color: transparent;
-  box-shadow: var(--shadow-glow-primary);
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+  border-color: var(--btn-primary-border);
+  box-shadow:
+    var(--btn-depth) var(--btn-depth) 0 0 var(--btn-primary-border),
+    0 0 24px var(--btn-primary-glow);
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  filter: brightness(1.1);
-  box-shadow: 0 0 40px rgb(255 137 171 / 30%);
-  transform: translateY(-1px);
+  background: var(--btn-primary-bg-hover);
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 var(--btn-primary-border),
+    0 0 24px var(--btn-primary-glow);
+  outline: none;
+}
+
+a.button.primary:active,
+button.button.primary:active {
+  background: var(--btn-primary-bg-active);
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 var(--btn-primary-border),
+    0 0 10px var(--btn-primary-glow);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -194,25 +216,41 @@ button.button.primary:disabled {
   pointer-events: none;
   background: var(--color-surface-3);
   color: var(--color-on-surface-dim);
+  border-color: transparent;
   box-shadow: none;
+  transform: none;
 }
 
-/* Secondary — The Cyan Ghost */
+/* ── Secondary — Teal hard slab ────────────────── */
 a.button.secondary,
 button.button.secondary {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  color: var(--color-secondary);
-  border-color: rgb(0 251 251 / 20%);
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-color);
+  border-color: var(--btn-secondary-border);
+  box-shadow:
+    var(--btn-depth) var(--btn-depth) 0 0 var(--btn-secondary-border),
+    0 0 24px var(--btn-secondary-glow);
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--color-secondary);
-  box-shadow: var(--shadow-glow-secondary);
-  transform: translateY(-1px);
+  background: var(--btn-secondary-bg-hover);
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 var(--btn-secondary-border),
+    0 0 24px var(--btn-secondary-glow);
+  outline: none;
+}
+
+a.button.secondary:active,
+button.button.secondary:active {
+  background: var(--btn-secondary-bg-active);
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 var(--btn-secondary-border),
+    0 0 10px var(--btn-secondary-glow);
 }
 
 a.button.secondary[aria-disabled="true"],
@@ -222,14 +260,18 @@ button.button.secondary:disabled {
   background: var(--color-surface-2);
   color: var(--color-on-surface-dim);
   border-color: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
-/* Accent — Gold Editorial */
+/* ── Accent — Gold text link ───────────────────── */
 a.button.accent,
 button.button.accent {
   background: transparent;
   color: var(--color-tertiary);
   border-color: transparent;
+  box-shadow: none;
+  transform: none;
   padding-left: 0;
   padding-right: 0;
 }
@@ -240,6 +282,9 @@ button.button.accent:hover,
 button.button.accent:focus-visible {
   color: var(--color-tertiary-dim);
   text-shadow: var(--shadow-glow-tertiary);
+  transform: none;
+  box-shadow: none;
+  outline: none;
 }
 
 a.button.accent[aria-disabled="true"],
@@ -247,11 +292,6 @@ button.button.accent:disabled {
   cursor: not-allowed;
   pointer-events: none;
   color: var(--color-on-surface-dim);
-}
-
-main {
-  /* max-width: 1440px; */
-  /* margin: 0 auto; */
 }
 
 /* ========================================

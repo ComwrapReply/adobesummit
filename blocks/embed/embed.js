@@ -55,6 +55,37 @@ const embedTwitter = (url) => {
   return embedHTML;
 };
 
+/**
+ * Embed a direct MP4 (or other native video) URL using a <video> element.
+ * Autoplay requires muted + playsinline to satisfy browser autoplay policies.
+ */
+const embedVideo = (url, autoplay) => {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'embed-video-wrapper';
+
+  const video = document.createElement('video');
+  video.src = url.href;
+  video.className = 'embed-video';
+  video.setAttribute('playsinline', '');
+  video.muted = true;
+  video.loop = true;
+  video.controls = !autoplay;
+
+  if (autoplay) {
+    video.autoplay = true;
+    video.play().catch(() => {
+      // Surface controls if autoplay is blocked (e.g. data-saver mode)
+      video.controls = true;
+    });
+  }
+
+  wrapper.append(video);
+  return wrapper;
+};
+
+/** Returns true for direct video file URLs (.mp4, .webm, .ogg, .mov) */
+const isDirectVideoUrl = (link) => /\.(mp4|webm|ogg|mov)(\?|$)/i.test(link);
+
 const loadEmbed = (block, link, autoplay) => {
   if (block.classList.contains('embed-is-loaded')) {
     return;
@@ -75,8 +106,18 @@ const loadEmbed = (block, link, autoplay) => {
     },
   ];
 
-  const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.includes(match)));
   const url = new URL(link);
+
+  // Handle direct video file URLs with a native <video> element
+  if (isDirectVideoUrl(link)) {
+    const videoEl = embedVideo(url, autoplay);
+    block.innerHTML = '';
+    block.append(videoEl);
+    block.classList.add('embed-video', 'embed-is-loaded');
+    return;
+  }
+
+  const config = EMBEDS_CONFIG.find((e) => e.match.some((match) => link.includes(match)));
   if (config) {
     block.innerHTML = config.embed(url, autoplay);
     block.classList = `block embed embed-${config.match[0]}`;
@@ -89,7 +130,11 @@ const loadEmbed = (block, link, autoplay) => {
 
 export default function decorate(block) {
   const placeholder = block.querySelector('picture');
-  const link = block.querySelector('a').href;
+  const linkEl = block.querySelector('a');
+
+  if (!linkEl) return;
+
+  const link = linkEl.href;
   block.textContent = '';
 
   if (placeholder) {
@@ -105,7 +150,8 @@ export default function decorate(block) {
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((e) => e.isIntersecting)) {
         observer.disconnect();
-        loadEmbed(block, link);
+        // Direct video URLs always autoplay (muted); others use default behaviour
+        loadEmbed(block, link, isDirectVideoUrl(link));
       }
     });
     observer.observe(block);
