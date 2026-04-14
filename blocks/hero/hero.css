@@ -1,7 +1,9 @@
-/* Hero – Dark split layout */
+/* Hero – full-bleed image with bottom-anchored text overlay */
 
+/* ── Strip section / wrapper chrome ───────────────────────── */
 main > .section.hero-container {
   padding: 0;
+  position: relative;
 }
 
 .hero-container .hero-wrapper {
@@ -9,31 +11,72 @@ main > .section.hero-container {
   padding: 0;
 }
 
+/* ── Block root ──────────────────────────────────────────────
+   Fills the full viewport width & height, acts as stacking
+   context for the image layer and the content overlay.        */
 .hero {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-32, 32px);
-  padding: var(--space-40, 40px) var(--space-24, 24px);
-  background-color: #0f172a;
-  background-image:
-    linear-gradient(rgb(15 23 42 / 80%), rgb(15 23 42 / 80%)),
-    url('/assets/Las-Vegas-Street-Image.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 400px;
-  align-items: center;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 480px;
+  overflow: hidden;
 }
 
-/* ===== Text column ===== */
+/* ── Full-bleed image layer ────────────────────────────────── */
+.hero .hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero .hero-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero .hero-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ── Content overlay ─────────────────────────────────────────
+   Sits above the image, anchored to the bottom.
+   A gradient provides dark-to-transparent contrast backdrop
+   from the bottom up to 35% of the hero height.               */
+.hero .hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  /* Gradient: solid dark at bottom → transparent at 35% height */
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 88%) 0%,
+    rgb(0 0 0 / 60%) 30%,
+    rgb(0 0 0 / 0%) 55%
+  );
+}
+
+/* ── Text column ───────────────────────────────────────────── */
 .hero .hero-text {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: var(--space-8, 8px);
+  width: 100%;
+  max-width: 900px;
+  padding: var(--space-32, 32px) var(--space-24, 24px) var(--space-40, 40px);
 }
 
-/* Badge / eyebrow */
+/* ── Badge / eyebrow ───────────────────────────────────────── */
 .hero .hero-badge {
   display: inline-block;
   width: fit-content;
@@ -48,40 +91,111 @@ main > .section.hero-container {
   margin-bottom: var(--space-8, 8px);
 }
 
-/* Main heading */
+/* ── Wave zoom animation ───────────────────────────────────── */
+
+/*
+ * Smooth sine-like wave: 0% and 100% are identical so the loop
+ * is seamless. The peak at 50% lifts and scales each letter.
+ * Left-to-right travel comes from per-char animation-delay in JS.
+ */
+@keyframes hero-char-wave {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    filter: brightness(1) drop-shadow(0 0 0 rgb(255 45 120 / 0%));
+  }
+
+  50% {
+    transform: scale(1.32) translateY(-10px);
+    filter: brightness(1.5) drop-shadow(0 0 14px rgb(255 45 120 / 80%));
+  }
+}
+
+/* ── Headings ──────────────────────────────────────────────── */
 .hero h1 {
-  color: #fff;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  /*
+   * color / background are intentionally unset here — the rainbow
+   * gradient is applied per .hero-char span so transforms don't
+   * clip the gradient (inline-block breaks background-clip: text
+   * when set on the parent).
+   */
+  color: transparent;
+  font-size: clamp(2.2rem, 5.5vw, 4.5rem);
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   margin: 0 0 var(--space-16, 16px);
   text-transform: uppercase;
 }
 
-.hero h2 {
-  color: #fff;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin: 0 0 var(--space-16, 16px);
+/* Individual character spans created by JS */
+.hero h1 .hero-char {
+  /*
+   * Each span carries the same full-width gradient but uses
+   * background-size: 100vw so all spans share the same colour sweep.
+   * background-attachment: fixed pins the gradient to the viewport,
+   * keeping colours consistent as spans shift during animation.
+   */
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    #ff2d78 0%,
+    #e040fb 16%,
+    #7c3aed 32%,
+    #2563eb 46%,
+    #06b6d4 58%,
+    #10b981 72%,
+    #fbbf24 86%,
+    #ff2d78 100%
+  );
+  background-size: 100vw auto;
+  background-attachment: fixed;
+  background-clip: text;
+
+  /* ease-in-out gives the sine-wave feel; fill-mode both ensures
+     the char starts correctly before its delay fires on first load */
+  animation: hero-char-wave 1.8s ease-in-out infinite both;
+  transform-origin: center bottom;
+  will-change: transform, filter;
 }
 
-/* Description text – cyan left border */
+.hero h1 .hero-char-space {
+  animation: none;
+}
+
+.hero h2 {
+  font-family: var(--heading-font-family);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: var(--label-letter-spacing, 0.2em);
+  text-transform: uppercase;
+  color: var(--color-secondary, #00fbfb);
+  margin: 0 0 var(--space-16, 1rem);
+
+  /* Soft cyan glow ties it to the site's neon palette */
+  text-shadow:
+    0 0 18px rgb(0 251 251 / 50%),
+    0 2px 8px rgb(0 0 0 / 60%);
+}
+
+/* ── Description ───────────────────────────────────────────── */
 .hero p:not(.hero-badge, :has(a), :has(picture)) {
-  color: #94a3b8;
+  color: #e2e8f0;
   font-size: 1.05rem;
   line-height: 1.7;
   border-left: 3px solid #06b6d4;
   padding-left: var(--space-16, 16px);
   margin: var(--space-8, 8px) 0 var(--space-24, 24px);
-  max-width: 500px;
+  max-width: 560px;
+  text-align: left;
 }
 
-/* ===== Buttons ===== */
+/* ── Buttons ───────────────────────────────────────────────── */
 .hero .hero-buttons {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-16, 16px);
   margin-top: var(--space-16, 16px);
 }
@@ -98,7 +212,7 @@ main > .section.hero-container {
   justify-content: center;
   padding: 14px 32px;
   border-radius: 6px;
-  font-size: 0.95rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -107,93 +221,124 @@ main > .section.hero-container {
 }
 
 .hero .hero-buttons a.button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgb(0 0 0 / 30%);
+  /* Individual button variants control their own hover transform */
+  box-shadow: 0 4px 20px rgb(0 0 0 / 40%);
 }
 
-/* Primary – pink/magenta gradient */
+/* Primary – cartoon / retro hard-slab 3D (ref: button.png)
+ *
+ * A single hard (zero-blur) box-shadow offset bottom-right creates
+ * the thick solid depth block. On press the button translates
+ * exactly by the shadow offset so the face lands flush — shadow
+ * collapses to zero → looks physically sunken.
+ */
 .hero .hero-buttons a.button-primary {
-  background: linear-gradient(135deg, #ec4899, #f43f5e);
+  --btn-depth: 6px; /* thickness of the 3D slab */
+
+  background: #ec4899;
   color: #fff;
-  border: none;
-}
-
-.hero .hero-buttons a.button-primary:hover {
-  background: linear-gradient(135deg, #f472b6, #fb7185);
-}
-
-/* Secondary – outline with cyan text */
-.hero .hero-buttons a.button-secondary {
-  background: transparent;
-  color: #06b6d4;
-  border: 2px solid #06b6d4;
-}
-
-.hero .hero-buttons a.button-secondary:hover {
-  background: rgb(6 182 212 / 10%);
-}
-
-/* ===== Image column ===== */
-.hero .hero-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero .hero-image picture {
+  border: 2px solid #831843;
+  border-radius: 6px;
   position: relative;
-  display: block;
-  border-radius: 12px;
-  overflow: hidden;
+  transform: translate(0, 0);
+
+  /* hard bottom + right shadow = the visible side-face block */
   box-shadow:
-    0 0 30px rgb(6 182 212 / 15%),
-    0 8px 32px rgb(0 0 0 / 40%);
-  border: 1px solid rgb(255 255 255 / 8%);
+    var(--btn-depth) var(--btn-depth) 0 0 #831843,
+    0 0 24px rgb(236 72 153 / 30%);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease;
+  will-change: transform, box-shadow;
 }
 
-.hero .hero-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 500px;
-  object-fit: cover;
-  border-radius: 12px;
+/* Hover — brighten face, keep slab so user can see it's pressable */
+.hero .hero-buttons a.button-primary:hover {
+  background: #f472b6;
+  box-shadow:
+    var(--btn-depth) var(--btn-depth) 0 0 #831843,
+    0 0 36px rgb(236 72 153 / 50%);
 }
 
-/* ===== Desktop – side by side ===== */
-@media (width >= 900px) {
-  .hero {
-    flex-direction: row;
-    padding: var(--space-80, 80px) var(--space-48, 48px);
-    gap: var(--space-48, 48px);
-    min-height: 500px;
-  }
+/* Active / press — translate RIGHT+DOWN by depth, collapse shadow → sunken */
+.hero .hero-buttons a.button-primary:active {
+  background: #db2777;
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 #831843,
+    0 0 12px rgb(236 72 153 / 20%);
+}
 
+/* Secondary – same hard-slab 3D as primary, using --color-secondary-container */
+.hero .hero-buttons a.button-secondary {
+  --btn-depth: 6px;
+
+  background: var(--color-secondary-container, #006a6a);
+  color: var(--color-on-secondary-container, #d9fffe);
+  border: 2px solid #004040;
+  border-radius: 6px;
+  position: relative;
+  transform: translate(0, 0);
+  box-shadow:
+    var(--btn-depth) var(--btn-depth) 0 0 #004040,
+    0 0 24px rgb(0 106 106 / 40%);
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Hover — brighten face, keep slab */
+.hero .hero-buttons a.button-secondary:hover {
+  background: #008080;
+  box-shadow:
+    var(--btn-depth) var(--btn-depth) 0 0 #004040,
+    0 0 36px rgb(0 128 128 / 55%);
+}
+
+/* Active / press — translate into shadow, collapse it → sunken */
+.hero .hero-buttons a.button-secondary:active {
+  background: #004040;
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 #004040,
+    0 0 12px rgb(0 106 106 / 20%);
+}
+
+/* ── Tablet (600px+) ───────────────────────────────────────── */
+@media (width >= 600px) {
   .hero .hero-text {
-    flex: 1 1 55%;
-    max-width: 55%;
-  }
-
-  .hero .hero-image {
-    flex: 1 1 45%;
-    max-width: 45%;
-  }
-
-  .hero .hero-image img {
-    max-height: 550px;
+    padding-bottom: var(--space-48, 48px);
   }
 }
 
+/* ── Desktop (900px+) ──────────────────────────────────────── */
+@media (width >= 900px) {
+  .hero .hero-text {
+    padding: var(--space-40, 40px) var(--space-48, 48px) var(--space-64, 64px);
+    max-width: 1440px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 10vw, 10rem);
+  }
+}
+
+/* ── Wide (1200px+) ────────────────────────────────────────── */
 @media (width >= 1200px) {
-  .hero {
-    padding: var(--space-80, 80px) var(--space-80, 80px);
+  .hero .hero-text {
+    padding-bottom: var(--space-80, 80px);
   }
 }
 
-/* ===== Accessibility ===== */
+/* ── Accessibility ─────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .hero .hero-buttons a.button {
     transition: none;
+  }
+
+  .hero h1 .hero-char {
+    animation: none;
   }
 }
 
