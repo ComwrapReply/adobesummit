@@ -34,14 +34,27 @@ function buildVideoEl(src) {
   const video = document.createElement('video');
   video.src = src;
   video.className = 'hero-video-media';
+
   video.setAttribute('playsinline', '');
+  video.setAttribute('muted', '');
+  video.setAttribute('loop', '');
+  video.setAttribute('autoplay', '');
+  // Chrome ignores the muted attribute on dynamically created elements —
+  // setting the property explicitly is required to guarantee silence
   video.muted = true;
-  video.loop = true;
-  video.autoplay = true;
-  video.play().catch(() => {
-    // Fallback: show controls when autoplay is blocked (data-saver / strict policy)
-    video.controls = true;
-  });
+
+  // Trigger play() after the element is connected to the DOM.
+  // Browsers reject play() on detached elements, which previously caused
+  // the catch block to run immediately and enable controls before the
+  // video had any chance to autoplay.
+  video.addEventListener('canplay', () => {
+    video.play().catch(() => {
+      // Only show controls if the browser genuinely blocks autoplay
+      // (e.g. strict data-saver policy) after the video is in the DOM
+      video.controls = true;
+    });
+  }, { once: true });
+
   return video;
 }
 
@@ -122,24 +135,56 @@ export default function decorate(block) {
       }
     }
 
-    // Detect single-link CTA paragraphs
-    if (clone.tagName === 'P' && clone.querySelectorAll('a').length === 1 && clone.children.length <= 2) {
-      const link = clone.querySelector('a');
-      if (link) link.classList.add('button');
+    // Detect CTA buttons. Handles all authored patterns:
+    //   1. Bare anchor:  <a href="…" class="button">Label</a>
+    //   2. Plain link:   <p><a href="…">Label</a></p>
+    //   3. Bold link:    <p><strong><a href="…">Label</a></strong></p>  → primary
+    //   4. Italic link:  <p><em><a href="…">Label</a></em></p>          → secondary
+    if (clone.tagName === 'A' && clone.hasAttribute('href')) {
+      // Pattern 1: bare <a> — wrap it in a <p> so it integrates with .hero-buttons
+      clone.classList.add('button');
+      const wrapper = document.createElement('p');
+      wrapper.append(clone);
+      textCol.append(wrapper);
+      return;
+    }
+
+    if (clone.tagName === 'P') {
+      const anchors = clone.querySelectorAll('a[href]');
+      const pText = clone.textContent.trim();
+      if (anchors.length === 1 && anchors[0].textContent.trim() === pText) {
+        const link = anchors[0];
+        const strong = link.closest('strong');
+        const em = link.closest('em');
+
+        link.classList.add('button');
+
+        if (strong) {
+          link.classList.add('primary');
+          strong.replaceWith(link);
+        } else if (em) {
+          link.classList.add('secondary');
+          em.replaceWith(link);
+        }
+      }
     }
 
     textCol.append(clone);
   });
 
-  // Wrap CTA buttons
+  // Collect all button-carrying paragraphs and move them into .hero-buttons
   const buttonParas = textCol.querySelectorAll('p:has(a.button)');
   if (buttonParas.length) {
     const btnWrap = document.createElement('div');
     btnWrap.classList.add('hero-buttons');
-    buttonParas.forEach((p, i) => {
+    let primaryAssigned = false;
+    buttonParas.forEach((p) => {
       const link = p.querySelector('a.button');
-      if (i === 0) link.classList.add('primary');
-      else link.classList.add('secondary');
+      // Assign primary/secondary if not already set by strong/em detection
+      if (!link.classList.contains('primary') && !link.classList.contains('secondary')) {
+        link.classList.add(primaryAssigned ? 'secondary' : 'primary');
+      }
+      primaryAssigned = true;
       btnWrap.append(p);
     });
     textCol.append(btnWrap);

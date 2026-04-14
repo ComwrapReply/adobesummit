@@ -66,17 +66,25 @@ const embedVideo = (url, autoplay) => {
   const video = document.createElement('video');
   video.src = url.href;
   video.className = 'embed-video';
+
   video.setAttribute('playsinline', '');
+  video.setAttribute('muted', '');
+  video.setAttribute('loop', '');
+  // Chrome ignores the muted attribute on dynamically created elements —
+  // the property must also be set explicitly
   video.muted = true;
-  video.loop = true;
-  video.controls = !autoplay;
 
   if (autoplay) {
-    video.autoplay = true;
-    video.play().catch(() => {
-      // Surface controls if autoplay is blocked (e.g. data-saver mode)
-      video.controls = true;
-    });
+    video.setAttribute('autoplay', '');
+    // play() must be called after the element is in the DOM — calling it on a
+    // detached element always rejects, which would incorrectly enable controls
+    video.addEventListener('canplay', () => {
+      video.play().catch(() => {
+        video.controls = true;
+      });
+    }, { once: true });
+  } else {
+    video.controls = true;
   }
 
   wrapper.append(video);

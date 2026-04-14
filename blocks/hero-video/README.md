@@ -24,7 +24,6 @@ The table is converted to this HTML structure at request time:
 <div class="hero-video">          ← block root  (class = block name, kebab-cased)
   <div>                           ← row
     <div>…cell content…</div>     ← column
-    <div>…cell content…</div>     ← column (if multi-column row)
   </div>
   <div>                           ← next row
     <div>…cell content…</div>
@@ -34,19 +33,34 @@ The table is converted to this HTML structure at request time:
 
 ---
 
-## Content model
+## How to add buttons / links
 
-### Minimal (video + heading only)
+**This is the most important authoring rule.**
 
-`+-------------------+`
-`| Hero Video        |`  ← block name row (one cell spanning full width)
-`+-------------------+`
-`| https://…/vid.mp4 |`  ← Row 1: direct MP4/WebM URL (plain link)
-`+-------------------+`
-`| # Page Title      |`  ← Row 2: h1 heading (gets rainbow wave animation)
-`+-------------------+`
+EDS only turns a link into a styled button when it is formatted in the document.
+The formatting controls which button style is applied:
 
-### Full (all fields)
+| What you type in the doc | Result | Button class |
+|---|---|---|
+| **[Register Now](https://…)** (bold) | Primary button (filled) | `.button.primary` |
+| *[Learn More](https://…)* (italic) | Secondary button (outline) | `.button.secondary` |
+| ***[Buy Now](https://…)*** (bold + italic) | Accent button (high-impact) | `.button.accent` |
+| [plain link](https://…) (no formatting) | First plain link → primary, second → secondary | auto |
+
+### Step-by-step in Google Docs
+
+1. Type your link text, e.g. `Register Now`
+2. Select the text and press `Ctrl+K` (or `Cmd+K`) to insert the link URL
+3. While the text is still selected, press `Ctrl+B` to make it **bold** → primary button
+   — or `Ctrl+I` to make it *italic* → secondary button
+4. Each CTA link must be in its **own paragraph** (its own line / Enter after each one)
+
+### Step-by-step in Microsoft Word
+
+Same as above — bold (`Ctrl+B`) = primary, italic (`Ctrl+I`) = secondary.
+Each link must be on its own line.
+
+### Example table layout
 
 `+----------------------------------------------+`
 `| Hero Video                                   |`
@@ -61,35 +75,33 @@ The table is converted to this HTML structure at request time:
 `| professionals at the world's largest         |`
 `| digital experience conference.               |`
 `+----------------------------------------------+`
-`| [Register Now](https://…)                    |`
+`| **[Register Now](https://adobe.com/summit)** |`  ← bold = primary button
 `+----------------------------------------------+`
-`| [Learn More](https://…)                      |`
+`| *[Learn More](https://adobe.com/agenda)*     |`  ← italic = secondary button
 `+----------------------------------------------+`
 
-### Field reference
+---
+
+## Full field reference
 
 | Row | Content | Notes |
 |-----|---------|-------|
-| 1 | Direct video URL (MP4, WebM, OGG, MOV) | Required. Pasted as a plain hyperlink. The block detects the file extension automatically. |
+| 1 | Direct video URL (MP4, WebM, OGG, MOV) | Required. Paste as a plain hyperlink — no bold/italic needed here. The block detects the file extension automatically. |
 | 2 | Short text (< 50 chars, no link) | Optional. Rendered as a pill-shaped badge / eyebrow label above the heading. |
 | 3 | Heading (H1 or H2) | Recommended. H1 gets the per-character rainbow wave animation. |
-| 4 | Body paragraph | Optional. Rendered with a left cyan border as a description. Multiple paragraphs allowed. |
-| 5+ | Single hyperlink per row | Optional. First link → primary CTA button, second → secondary. |
+| 4 | Body paragraph | Optional. Rendered with a left cyan border. Multiple paragraphs allowed. |
+| 5+ | **Bold** or *italic* link, one per row | Optional. Bold → primary button, italic → secondary. |
 
 ---
 
 ## Authoring tips
 
-- Paste the raw video URL as a hyperlink in its own table row.
-  The block matches `.mp4 / .webm / .ogg / .mov` at the end of the URL
-  (query strings are fine: `video.mp4?v=2` still matches).
-- The video row can appear anywhere in the table — the JS pulls it out before
-  building the text overlay, so order does not matter for the video field.
-- Autoplay is always **muted** (required by browsers). If the viewer's browser
-  or data-saver setting blocks autoplay, video controls appear automatically.
-- To add a block variant (e.g. a version without the wave animation) name the
-  block `Hero Video (no-wave)` in the table. The extra class `no-wave` is added
-  to the block element and can be targeted in CSS.
+- Paste the raw video URL as a plain hyperlink in its own row — do NOT bold/italic it.
+  The block detects `.mp4 / .webm / .ogg / .mov` at the end of the URL automatically.
+- Put each CTA button on its own paragraph / table row.
+- The video row can appear anywhere in the table; row order does not matter for the video field.
+- Autoplay is always **muted** (required by all browsers). If the viewer's data-saver
+  setting blocks autoplay, video player controls appear automatically as a fallback.
 
 ---
 
