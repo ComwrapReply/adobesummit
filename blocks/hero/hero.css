@@ -163,6 +163,14 @@ main > .section.hero-container {
   animation: none;
 }
 
+/* ── h2 sparkle wrapper ─────────────────────────────────────── */
+.hero .hero-h2-wrapper {
+  display: block;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto var(--space-16, 1rem);
+}
+
 .hero h2 {
   font-family: var(--heading-font-family);
   font-size: clamp(1.5rem, 4vw, 3rem);
@@ -171,12 +179,91 @@ main > .section.hero-container {
   letter-spacing: var(--label-letter-spacing, 0.2em);
   text-transform: uppercase;
   color: var(--color-secondary, #00fbfb);
-  margin: 0 0 var(--space-16, 1rem);
+  margin: 0;
+  position: relative;
+  z-index: 1;
 
-  /* Soft cyan glow ties it to the site's neon palette */
+  /* Soft cyan glow + green shimmer */
   text-shadow:
     0 0 18px rgb(0 251 251 / 50%),
+    0 0 40px rgb(16 185 129 / 40%),
     0 2px 8px rgb(0 0 0 / 60%);
+}
+
+/* ── Sparkle container — fills the h2 wrapper ──────────────── */
+.hero .hero-sparkles {
+  position: absolute;
+  inset: -40% -20%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* ── Individual sparkle ─────────────────────────────────────── */
+.hero .hero-sparkle {
+  position: absolute;
+  left: var(--sparkle-x, 50%);
+  top: var(--sparkle-y, 50%);
+  width: var(--sparkle-size, 6px);
+  height: var(--sparkle-size, 6px);
+  opacity: 0;
+  transform: scale(0) rotate(0deg);
+  animation:
+    hero-sparkle-twinkle var(--sparkle-duration, 1.8s) ease-in-out
+    var(--sparkle-delay, 0s) infinite;
+}
+
+/* Four-pointed star shape via clip-path */
+.hero .hero-sparkle::before,
+.hero .hero-sparkle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--sparkle-color, #00fbfb);
+  box-shadow: 0 0 6px 2px var(--sparkle-color, #00fbfb);
+}
+
+/* Vertical arm of the star */
+.hero .hero-sparkle::before {
+  width: 30%;
+  left: 35%;
+}
+
+/* Horizontal arm of the star */
+.hero .hero-sparkle::after {
+  height: 30%;
+  top: 35%;
+}
+
+@keyframes hero-sparkle-twinkle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1) rotate(45deg);
+  }
+
+  80% {
+    opacity: 0.8;
+    transform: scale(0.8) rotate(135deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+  }
+}
+
+/* ── Disable sparkles for users who prefer reduced motion ────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-sparkle {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* ── Description ───────────────────────────────────────────── */
@@ -227,7 +314,7 @@ main > .section.hero-container {
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 10vw, 10rem);
+    font-size: clamp(3rem, 10vw, 6rem);
   }
 }
 

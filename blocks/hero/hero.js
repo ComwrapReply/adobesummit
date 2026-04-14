@@ -1,4 +1,68 @@
 /**
+ * Sparkle colours — pulled from the site's neon palette.
+ * Each sparkle randomly picks one of these on each cycle.
+ */
+const SPARKLE_COLORS = ['#00fbfb', '#10b981', '#06b6d4', '#ffffff', '#a7f3d0'];
+
+const SPARKLE_COUNT = 18;
+
+/**
+ * Returns a random float between min and max.
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+const rand = (min, max) => Math.random() * (max - min) + min;
+
+/**
+ * Randomises the position and colour of a single sparkle element.
+ * Called on creation and again every animation cycle so sparkles
+ * drift to a new location after each twinkle.
+ * @param {HTMLElement} el
+ */
+function randomiseSparkle(el) {
+  const color = SPARKLE_COLORS[Math.floor(Math.random() * SPARKLE_COLORS.length)];
+  el.style.setProperty('--sparkle-x', `${rand(0, 100)}%`);
+  el.style.setProperty('--sparkle-y', `${rand(-40, 140)}%`);
+  el.style.setProperty('--sparkle-color', color);
+  el.style.setProperty('--sparkle-size', `${rand(4, 10)}px`);
+  el.style.setProperty('--sparkle-delay', `${rand(0, 2.5)}s`);
+  el.style.setProperty('--sparkle-duration', `${rand(1.2, 2.8)}s`);
+}
+
+/**
+ * Creates an animated sparkle field around the h2 inside the hero block.
+ * Spawns SPARKLE_COUNT absolutely-positioned <span> elements that twinkle
+ * using a CSS keyframe animation. JS re-randomises each sparkle's position
+ * after every cycle so they feel alive and non-repetitive.
+ * @param {HTMLHeadingElement} h2
+ */
+function addSparkles(h2) {
+  const container = document.createElement('span');
+  container.className = 'hero-sparkles';
+  container.setAttribute('aria-hidden', 'true');
+
+  for (let i = 0; i < SPARKLE_COUNT; i += 1) {
+    const sparkle = document.createElement('span');
+    sparkle.className = 'hero-sparkle';
+    randomiseSparkle(sparkle);
+
+    // Re-randomise position when this sparkle's animation ends so each
+    // twinkle appears in a fresh spot — gives a drifting, living effect
+    sparkle.addEventListener('animationiteration', () => randomiseSparkle(sparkle));
+
+    container.append(sparkle);
+  }
+
+  // Wrap h2 in a relative-positioned container so sparkles are anchored to it
+  const wrapper = document.createElement('span');
+  wrapper.className = 'hero-h2-wrapper';
+  h2.replaceWith(wrapper);
+  wrapper.append(container);
+  wrapper.append(h2);
+}
+
+/**
  * Wraps each character of an h1 in a <span class="hero-char"> so the
  * zooming-wave CSS animation can stagger per letter.
  * Spaces become <span class="hero-char hero-char--space"> for layout.
@@ -122,4 +186,8 @@ export default function decorate(block) {
   // Wrap h1 characters for the wave animation after DOM is built
   const h1 = block.querySelector('h1');
   if (h1) wrapChars(h1);
+
+  // Add sparkle field around h2 if present
+  const h2 = block.querySelector('h2');
+  if (h2) addSparkles(h2);
 }
