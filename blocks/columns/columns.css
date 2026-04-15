@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-.footer-wrapper columns-wrapper {
+.footer-wrapper .columns-wrapper {
     max-width: 600px;
     text-align: center;
     background: var(--glass-bg);
