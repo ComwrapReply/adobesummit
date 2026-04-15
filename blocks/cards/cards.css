@@ -98,7 +98,7 @@ main .section .cards-wrapper {
 /* ── Headings inside overlay ────────────────────── */
 .cards .cards-card-body h3,
 .cards .cards-card-body h4 {
-  font-family: var(--font-family-heading, sans-serif);
+  font-family: var(--font-family-body, sans-serif);
   font-weight: 800;
 
   /* Pure white for maximum contrast against the dark scrim */
@@ -121,7 +121,7 @@ main .section .cards-wrapper {
   color: var(--color-on-surface, #dee5ff);
   margin: 0;
   font-size: var(--body-font-size-s, 16px);
-  line-height: 1.6;
+  line-height: 1.4;
   text-shadow: 0 1px 6px rgb(0 0 0 / 70%);
 }
 

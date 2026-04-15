@@ -77,6 +77,7 @@
   --font-family-body: 'Alaska-SemiBold', 'Alaska-SemiBold-fallback', sans-serif;
   --font-family-body-regular: 'Alaska-Regular', 'Alaska-Regular-fallback', sans-serif;
   --font-family-label: 'Alaska-Bold', 'Alaska-Bold-fallback', sans-serif;
+  --font-family-base: 'Alaska-Light', 'Alaska-Light-fallback', sans-serif;
 
   /* Aliases */
   --body-font-family: var(--font-family-body);
