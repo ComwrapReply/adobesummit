@@ -73,9 +73,9 @@
      Space Grotesk = headlines, labels
      Manrope = body, titles
      ======================================== */
-  --font-family-heading: 'Space Grotesk', 'Space Grotesk-fallback', sans-serif;
-  --font-family-body: 'Manrope', 'Manrope-fallback', sans-serif;
-  --font-family-label: 'Space Grotesk', 'Space Grotesk-fallback', sans-serif;
+  --font-family-heading: 'Alaska-Bold', 'Alaska-Bold-fallback', sans-serif;
+  --font-family-body: 'Alaska-SemiBold', 'Alaska-SemiBold-fallback', sans-serif;
+  --font-family-label: 'Alaska-Bold', 'Alaska-Bold-fallback', sans-serif;
 
   /* Aliases */
   --body-font-family: var(--font-family-body);
@@ -104,7 +104,7 @@
   /* Label (eyebrow text) */
   --label-font-size-sm: 0.75rem;
   --label-font-size-md: 0.875rem;
-  --label-letter-spacing: 0.2em;
+  --label-letter-spacing: 0.1em;
 
   /* ========================================
      SPACING SCALE
@@ -158,8 +158,8 @@
      ======================================== */
   --btn-depth: 5px;
   --btn-radius: 6px;
-  --btn-font-size: var(--body-font-size-s);
-  --btn-padding: 0.75em 1.75em;
+  --btn-font-size: var(--body-font-size-xs);
+  --btn-padding: 0.5em 1.5em;
   --btn-transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
 
   /* Primary slab colours */

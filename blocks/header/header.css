@@ -82,9 +82,10 @@ header nav a:any-link {
 
 /* hamburger */
 header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
-  display: flex;
+    grid-area: hamburger;
+    height: 22px;
+    display: flex;
+    display: none;
   align-items: center;
 }
 
@@ -163,12 +164,12 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 
 /* brand */
 header .nav-brand {
-    margin-top: 4rem;
+  margin-top:2rem;
   grid-area: brand; 
 }
 
 header nav .nav-brand img {
-  width: 256px;
+  width: 124px;
   height: auto;
 }
 

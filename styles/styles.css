@@ -14,7 +14,7 @@
 
 /* fallback fonts */
 @font-face {
-  font-family: 'Alaska-Bold';
+  font-family: "Alaska-Bold"; /* stylelint-disable-line font-family-name-quotes */
   size-adjust: 105%;
   src: local('Arial');
 }
@@ -147,6 +147,7 @@ a:hover {
    translates onto the shadow → it collapses → sunken.
    ======================================== */
 p.button-wrapper {
+  text-align: center;
   margin: 12px 0;
 }
 
@@ -162,7 +163,7 @@ button.button {
   padding: var(--btn-padding);
   border: 2px solid transparent;
   border-radius: var(--btn-radius);
-  font-family: var(--font-family-heading);
+  font-family: var(--font-family-body);
   font-weight: 700;
   font-size: var(--btn-font-size);
   line-height: 1.25;
@@ -175,7 +176,50 @@ button.button {
   transform: translate(0, 0);
   transition: var(--btn-transition);
   will-change: transform, box-shadow;
-  min-height: 44px;
+  min-height: 24px;
+}
+
+/* Default button style when no explicit variant is authored */
+a.button:not(.primary, .secondary, .accent),
+button.button:not(.primary, .secondary, .accent) {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+  border-color: var(--btn-primary-border);
+  box-shadow:
+    var(--btn-depth) var(--btn-depth) 0 0 var(--btn-primary-border),
+    0 0 24px var(--btn-primary-glow);
+}
+
+a.button:not(.primary, .secondary, .accent):hover,
+a.button:not(.primary, .secondary, .accent):focus-visible,
+button.button:not(.primary, .secondary, .accent):hover,
+button.button:not(.primary, .secondary, .accent):focus-visible {
+  background: var(--btn-primary-bg-hover);
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 var(--btn-primary-border),
+    0 0 24px var(--btn-primary-glow);
+  outline: none;
+}
+
+a.button:not(.primary, .secondary, .accent):active,
+button.button:not(.primary, .secondary, .accent):active {
+  background: var(--btn-primary-bg-active);
+  transform: translate(var(--btn-depth), var(--btn-depth));
+  box-shadow:
+    0 0 0 0 var(--btn-primary-border),
+    0 0 10px var(--btn-primary-glow);
+}
+
+a.button:not(.primary, .secondary, .accent)[aria-disabled="true"],
+button.button:not(.primary, .secondary, .accent):disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  background: var(--color-surface-3);
+  color: var(--color-on-surface-dim);
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 /* ── Primary — Pink hard slab ──────────────────── */
@@ -183,10 +227,6 @@ a.button.primary,
 button.button.primary {
   background: var(--btn-primary-bg);
   color: var(--btn-primary-color);
-  border-color: var(--btn-primary-border);
-  box-shadow:
-    var(--btn-depth) var(--btn-depth) 0 0 var(--btn-primary-border),
-    0 0 24px var(--btn-primary-glow);
 }
 
 a.button.primary:hover,
