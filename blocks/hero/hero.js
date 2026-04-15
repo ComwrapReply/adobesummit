@@ -63,6 +63,37 @@ function addSparkles(h2) {
   wrapper.append(h2);
 }
 
+/**
+ * Injects a down-arrow link directly after the hero h2.
+ * @param {HTMLHeadingElement} h2
+ */
+function addDownArrow(h2) {
+  if (!h2) return;
+
+  const arrowConfig = {
+    targetId: 'video',
+    label: 'Scroll to video',
+  };
+
+  const arrow = document.createElement('a');
+  arrow.className = 'hero-down-arrow';
+  arrow.href = `#${arrowConfig.targetId}`;
+  arrow.setAttribute('title', arrowConfig.label);
+  arrow.setAttribute('aria-label', arrowConfig.label);
+  arrow.addEventListener('click', (event) => {
+    event.preventDefault();
+    const targetEl = document.getElementById(arrowConfig.targetId);
+    if (!targetEl) return;
+
+    const scrollConfig = {
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    };
+    targetEl.scrollIntoView(scrollConfig);
+  });
+  h2.insertAdjacentElement('afterend', arrow);
+}
+
 /* eslint-enable no-unused-vars */
 
 /**
@@ -181,6 +212,9 @@ export default function decorate(block) {
     });
     textCol.append(btnWrap);
   }
+
+  const heroH2 = textCol.querySelector('h2');
+  if (heroH2) addDownArrow(heroH2);
 
   contentLayer.append(textCol);
 

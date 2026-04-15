@@ -60,8 +60,15 @@ const embedTwitter = (url) => {
  * Autoplay requires muted + playsinline to satisfy browser autoplay policies.
  */
 const embedVideo = (url, autoplay) => {
+  const embedVideoConfig = {
+    anchorId: 'video',
+  };
+
   const wrapper = document.createElement('div');
   wrapper.className = 'embed-video-wrapper';
+  if (!document.getElementById(embedVideoConfig.anchorId)) {
+    wrapper.id = embedVideoConfig.anchorId;
+  }
 
   const video = document.createElement('video');
   video.src = url.href;

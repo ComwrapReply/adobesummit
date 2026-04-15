@@ -75,6 +75,7 @@
      ======================================== */
   --font-family-heading: 'Alaska-Bold', 'Alaska-Bold-fallback', sans-serif;
   --font-family-body: 'Alaska-SemiBold', 'Alaska-SemiBold-fallback', sans-serif;
+  --font-family-body-regular: 'Alaska-Regular', 'Alaska-Regular-fallback', sans-serif;
   --font-family-label: 'Alaska-Bold', 'Alaska-Bold-fallback', sans-serif;
 
   /* Aliases */
@@ -157,18 +158,19 @@
      Press = translate face onto shadow → collapse.
      ======================================== */
   --btn-depth: 5px;
-  --btn-radius: 6px;
+  --btn-radius: 25px;
   --btn-font-size: var(--body-font-size-xs);
-  --btn-padding: 0.5em 1.5em;
+  --btn-padding: 0.75em 2em;
   --btn-transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
 
   /* Primary slab colours */
-  --btn-primary-bg: #ec4899;
-  --btn-primary-bg-hover: #db2777;
-  --btn-primary-bg-active: #be185d;
-  --btn-primary-color: #fff;
-  --btn-primary-border: #831843;
+  --btn-primary-bg: #00fbfb;
+  --btn-primary-bg-hover: #006a6a;
+  --btn-primary-bg-active: #006a6a;
+  --btn-primary-color: #ffffff;
+  --btn-primary-border: #006a6a;
   --btn-primary-glow: rgb(236 72 153 / 30%);
+  --btn-primary-gradient: linear-gradient(90deg, rgb(66 182 149) 0%, rgb(63 185 172) 50%, rgb(53 180 192) 100%);
 
   /* Secondary slab colours */
   --btn-secondary-bg: var(--color-secondary-container);
