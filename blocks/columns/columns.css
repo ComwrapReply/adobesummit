@@ -33,7 +33,7 @@
 }
 
 @media (width >= 900px) {
-	main > .section > div.columns-wrapper {
+	.footer-wrapper .columns-wrapper {
 			margin: var(--space-24) auto;
 	}
 
