@@ -6,9 +6,8 @@
 .footer-wrapper columns-wrapper {
     max-width: 600px;
     text-align: center;
-    border: 1px solid var(--color-outline);
-    border-radius: 25px;
     background: var(--glass-bg);
+	-webkit-backdrop-filter: var(--glass-blur);
     backdrop-filter: var(--glass-blur);
     border: var(--glass-border);
     border-radius: var(--radius-xl);
