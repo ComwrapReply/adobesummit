@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * Sparkle colours — pulled from the site's neon palette.
  * Each sparkle randomly picks one of these on each cycle.
@@ -62,12 +63,15 @@ function addSparkles(h2) {
   wrapper.append(h2);
 }
 
+/* eslint-enable no-unused-vars */
+
 /**
  * Wraps each character of an h1 in a <span class="hero-char"> so the
  * zooming-wave CSS animation can stagger per letter.
  * Spaces become <span class="hero-char hero-char--space"> for layout.
  * @param {HTMLHeadingElement} h1
  */
+// eslint-disable-next-line no-unused-vars
 function wrapChars(h1) {
   const text = h1.textContent;
   h1.textContent = '';
@@ -183,11 +187,10 @@ export default function decorate(block) {
   block.append(imageLayer);
   block.append(contentLayer);
 
-  // Wrap h1 characters for the wave animation after DOM is built
-  const h1 = block.querySelector('h1');
-  if (h1) wrapChars(h1);
-
-  // Add sparkle field around h2 if present
-  const h2 = block.querySelector('h2');
-  if (h2) addSparkles(h2);
+  // Wave animation and sparkles are currently disabled.
+  // To re-enable: uncomment the two lines below.
+  // const h1 = block.querySelector('h1');
+  // if (h1) wrapChars(h1);
+  // const h2 = block.querySelector('h2');
+  // if (h2) addSparkles(h2);
 }

@@ -91,13 +91,7 @@ main > .section.hero-container {
   margin-bottom: var(--space-8, 8px);
 }
 
-/* ── Wave zoom animation ───────────────────────────────────── */
-
-/*
- * Smooth sine-like wave: 0% and 100% are identical so the loop
- * is seamless. The peak at 50% lifts and scales each letter.
- * Left-to-right travel comes from per-char animation-delay in JS.
- */
+/* ── Wave zoom animation — DISABLED ────────────────────────── */
 @keyframes hero-char-wave {
   0%, 100% {
     transform: scale(1) translateY(0);
@@ -118,23 +112,20 @@ main > .section.hero-container {
    * clip the gradient (inline-block breaks background-clip: text
    * when set on the parent).
    */
-  color: transparent;
+  color: rgb(255, 45, 120);
   font-size: clamp(2.2rem, 5.5vw, 4.5rem);
   font-weight: 900;
   line-height: 1.2;
   letter-spacing: -0.02em;
   margin: 0 0 var(--space-16, 16px);
   text-transform: uppercase;
+  text-shadow:0 0 18px rgb(255 45 120 / 30%),
+  0 0 40px rgb(255 45 120 / 40%),
+  0 2px 8px rgb(255 45 120 / 60%)
 }
 
-/* Individual character spans created by JS */
+/* Individual character spans created by JS — animation disabled */
 .hero h1 .hero-char {
-  /*
-   * Each span carries the same full-width gradient but uses
-   * background-size: 100vw so all spans share the same colour sweep.
-   * background-attachment: fixed pins the gradient to the viewport,
-   * keeping colours consistent as spans shift during animation.
-   */
   display: inline-block;
   color: transparent;
   background: linear-gradient(
@@ -151,12 +142,7 @@ main > .section.hero-container {
   background-size: 100vw auto;
   background-attachment: fixed;
   background-clip: text;
-
-  /* ease-in-out gives the sine-wave feel; fill-mode both ensures
-     the char starts correctly before its delay fires on first load */
-  animation: hero-char-wave 1.8s ease-in-out infinite both;
-  transform-origin: center bottom;
-  will-change: transform, filter;
+  animation: none;
 }
 
 .hero h1 .hero-char-space {
@@ -199,18 +185,9 @@ main > .section.hero-container {
   overflow: visible;
 }
 
-/* ── Individual sparkle ─────────────────────────────────────── */
+/* ── Individual sparkle — animation disabled ────────────────── */
 .hero .hero-sparkle {
-  position: absolute;
-  left: var(--sparkle-x, 50%);
-  top: var(--sparkle-y, 50%);
-  width: var(--sparkle-size, 6px);
-  height: var(--sparkle-size, 6px);
-  opacity: 0;
-  transform: scale(0) rotate(0deg);
-  animation:
-    hero-sparkle-twinkle var(--sparkle-duration, 1.8s) ease-in-out
-    var(--sparkle-delay, 0s) infinite;
+  display: none;
 }
 
 /* Four-pointed star shape via clip-path */
