@@ -145,10 +145,11 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 header .nav-brand {
   margin-top:4rem;
   grid-area: brand; 
+  text-align: center;
 }
 
 header nav .nav-brand img {
-  width: 124px;
+  width: 176px;
   height: auto;
 }
 
