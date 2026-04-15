@@ -148,7 +148,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 
 /* brand */
 header .nav-brand {
-  margin-top:2rem;
+  margin-top:4rem;
   grid-area: brand; 
 }
 
@@ -190,6 +190,10 @@ header nav .nav-sections ul > li > ul > li {
 }
 
 @media (width >= 900px) {
+  header nav .nav-brand img {
+      width: 256px;
+  }  
+
   header nav .nav-sections {
     display: block;
     visibility: visible;

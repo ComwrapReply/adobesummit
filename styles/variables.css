@@ -161,7 +161,7 @@
   --btn-depth: 5px;
   --btn-radius: 25px;
   --btn-font-size: var(--body-font-size-xs);
-  --btn-padding: 0.75em 2em;
+  --btn-padding: 1em 2.4em;
   --btn-transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.12s ease;
 
   /* Primary slab colours */
