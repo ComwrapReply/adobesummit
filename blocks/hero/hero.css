@@ -92,10 +92,6 @@ main > .section.hero-container {
   line-height: 1;
   letter-spacing: var(--label-letter-spacing, 0.2em);
   text-transform: uppercase;
-  text-shadow:
-    0 0 10px rgb(0 251 251 / 65%),
-    0 0 24px rgb(16 185 129 / 50%),
-    0 2px 10px rgb(0 0 0 / 65%);
   margin-bottom: var(--space-12, 12px);
 }
 
@@ -127,9 +123,6 @@ main > .section.hero-container {
   letter-spacing: var(--label-letter-spacing, 0.1em);
   margin: 0 0 var(--space-16, 16px);
   text-transform: uppercase;
-  text-shadow:0 0 18px rgb(255 45 120 / 0%),
-  0 0 40px rgb(255 45 120 / 40%),
-  0 2px 8px rgb(255 45 120 / 60%)
 }
 
 /* Individual character spans created by JS — animation disabled */
@@ -176,12 +169,6 @@ main > .section.hero-container {
   margin: 0;
   position: relative;
   z-index: 1;
-
-  /* Soft cyan glow + green shimmer */
-  text-shadow:
-    0 0 18px rgb(0 251 251 / 50%),
-    0 0 40px rgb(16 185 129 / 40%),
-    0 2px 8px rgb(0 0 0 / 60%);
 }
 
 /* ── Sparkle container — fills the h2 wrapper ──────────────── */
