@@ -186,6 +186,10 @@ header nav .nav-sections ul > li > ul > li {
 }
 
 @media (width >= 900px) {
+    header .nav-brand {
+        text-align: left;
+    }
+
   header nav .nav-brand img {
       width: 256px;
   }  
