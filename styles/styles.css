@@ -447,6 +447,8 @@ main .section.glass {
     margin-top: 3rem;
 }
 
-#hide {
-    display: none;
+#image {
+    visibility: hidden;
+    height: 0;
+    width: 0;
 }
