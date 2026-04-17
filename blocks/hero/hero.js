@@ -71,7 +71,7 @@ function addDownArrow(h2) {
   if (!h2) return;
 
   const arrowConfig = {
-    targetId: 'cards',
+    targetId: 'your-star-moment',
     label: 'Scroll to cards of images',
   };
 
