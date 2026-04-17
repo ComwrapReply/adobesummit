@@ -71,7 +71,7 @@ function addDownArrow(h2) {
   if (!h2) return;
 
   const arrowConfig = {
-    targetId: 'image',
+    targetId: 'hide',
     label: 'Scroll to cards of images',
   };
 

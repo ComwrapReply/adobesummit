@@ -446,3 +446,7 @@ main .section.glass {
     color: var(--color-secondary);
     margin-top: 3rem;
 }
+
+#hide {
+    display: none;
+}
