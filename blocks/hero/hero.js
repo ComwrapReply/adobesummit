@@ -71,8 +71,8 @@ function addDownArrow(h2) {
   if (!h2) return;
 
   const arrowConfig = {
-    targetId: 'video',
-    label: 'Scroll to video',
+    targetId: 'cards',
+    label: 'Scroll to cards',
   };
 
   const arrow = document.createElement('a');
