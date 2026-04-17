@@ -72,7 +72,7 @@ function addDownArrow(h2) {
 
   const arrowConfig = {
     targetId: 'cards',
-    label: 'Scroll to cards',
+    label: 'Scroll to cards of images',
   };
 
   const arrow = document.createElement('a');
