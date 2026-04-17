@@ -178,7 +178,7 @@ main > .section.hero-container {
   display: inline-block;
   width: 35px;
   height: 35px;
-  margin: var(--space-8, 8px) 0 var(--space-16, 16px);
+  padding: var(--space-8, 8px) 0 var(--space-16, 16px);
   background: transparent;
   text-decoration: none;
   cursor: pointer;
